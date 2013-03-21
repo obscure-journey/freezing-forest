@@ -1,0 +1,274 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "base";
+
+body { 
+	@include aligntoedges;
+	margin:0;
+	padding:0;
+	padding-top: $topnav-height;
+}
+
+/*******************************************************************
+	NAV BAR
+	******************************************************************/
+
+.navbar {
+	position:fixed;
+	top:0;
+	height: $topnav-height + 1px; /* extra pixel for redundancy */
+	font-size: 15px;
+	
+	.brand {
+		line-height: 18px;
+		text-decoration: none;
+		font-size: 25px;
+		color: $darknavyblue;
+		text-shadow: 0 1px 0 rgba(255,255,255,.05), 0 0 30px rgba(255,255,255,.125);
+		-webkit-transition: all .2s linear;
+			 -moz-transition: all .2s linear;
+						transition: all .2s linear;
+	}
+
+	.brand:hover {
+		color: $grey;
+		text-decoration: none;
+		text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 15px rgba(255,255,255,1);
+	}
+
+}
+
+/*******************************************************************
+	LOG IN
+	******************************************************************/
+
+.container { // CONFLICT +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	height:100%;
+	position:relative;
+}
+
+.login-form {
+	margin: 13% 40%;
+}
+
+/*******************************************************************
+	FULL SCREEN MAP
+	******************************************************************/
+
+html { height: 100%; } // CONFLICT +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// make right pane 30% wide for wide screens - otherwise, make it at least 300 px. Animated.
+.map-expanding-pane {
+	height:100%;
+	overflow:hidden;
+	position:relative;
+	float:right;
+	background-color:#fff;
+	max-width:30%;
+	min-width:300px;
+	
+	@include single-transition(max-width, 1s, ease-in-out);
+	
+	.padding {
+		@include aligntoedges;
+		margin: 30px;
+	}
+	
+	// make the right pane huge - the size of a normal web page.
+	&.expand {
+		max-width:1200px;
+		
+		// hide the stuff currently on the pane when the pane expands
+		.aligntoedges {
+			display:none;
+		}
+	}
+}
+
+// position the search box
+.searchbox-container {
+	position: absolute;
+	top: 75px;
+	left: 100px;
+	font-size:15px;
+	z-index:100;
+	
+	input {
+		width: 500px;
+	}
+}
+
+/*******************************************************************
+	ADD LISTING PAGE
+	******************************************************************/
+
+$addlisting-topnav-height: 38px;
+
+.container { // CONFLICT +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*			background-color: rgb(199, 233, 221);*/
+}
+
+// make way for the subnav
+body { // CONFLICT +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	padding-top: $topnav-height + $addlisting-topnav-height;
+}
+
+// VERY POOR CSS TECHNIQUE:::
+.searchbox-container {
+	position: absolute;
+	top: $topnav-height + $addlisting-topnav-height + 25px;
+}
+
+
+//////////////////////////////////////////
+
+// Add a chevron to the bottom of the active element on the navbar
+.nav li.active {
+	&:before {
+		content: "";
+    border-style: solid;
+    border-width: 0 9px 9px 9px;
+    border-color: transparent transparent $maincolor-light transparent;
+    height: 0px;
+    position: absolute;
+		@include calc (left, "50% - 9px");
+    bottom: 0;
+    width: 0;
+    -webkit-transform: rotate(360deg);
+	}
+}
+
+#addlisting-topnav {
+	background-color: $maincolor-light;
+	height:$addlisting-topnav-height;
+	top:$topnav-height;
+	
+	.container {
+		position:relative;
+	}
+	
+	.fluidcontainer {
+		position:relative;
+	}
+	
+	h4 {
+			float:left;
+			line-height: $addlisting-topnav-height;
+			margin:0;
+			padding-left:150px;
+			color: #fff;
+			
+			small {
+				color: $color-superlightgrey;
+			}
+		}
+		
+		.btn {
+			font-size: 14px;
+		}
+		#btn-back {
+			width:150px;
+			float:left;
+		}
+		#btn-cancel {
+			width:70px;
+			float:right;
+		}
+		#btn-save {
+			width:50px;
+			float:right;
+		}
+		#btn-send {
+			margin-left: 30px;
+			width:100px;
+			float:right;
+		}
+
+		#sendto-tooltip {
+			position: absolute;
+			right: 0;
+			top: $addlisting-topnav-height;
+			width: 300px;
+			z-index: 200;
+			
+			&:before {
+				left:242px;
+			}
+		}
+
+}
+
+///////////////////////////////////////////////////////////////
+
+.bs-docs-sidenav {
+width: 250px;
+	margin: 30px 0 0 0;
+  padding: 0;
+  background-color: #fff;
+	
+  @include box-shadow(0 1px 4px rgba(0,0,0,.065));
+	
+	/* Chevrons */
+
+	.icon-chevron-right {
+		float: right;
+		margin-top: 2px;
+		margin-right: -6px;
+		opacity: 0;
+	}
+	a:hover .icon-chevron-right {
+		opacity: .5;
+	}
+	
+	li {
+		&:first-child > a { 		}
+		&:last-child  > a { }
+		a {
+			display: block;
+			width: 190px \9;
+			margin: 0 0 -1px;
+			padding: 8px 14px;
+			border: 1px solid #e5e5e5;
+			text-decoration: none;
+			color: $color-grey;
+			
+			&:hover {
+				background-color: #f5f5f5;
+			}
+		}
+	}
+
+	.active {
+		a {
+			position: relative;
+			z-index: 2;
+			padding: 9px 15px;
+			border: 0;
+			@include text-shadow(0 1px 0 rgba(0,0,0,.15));
+			@include box-shadow(inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1));
+			background-color: $maincolor-light;
+			
+			&:hover { 
+				background-color: $maincolor-lightdark; 
+			}
+		}
+		.icon-chevron-right,
+		a:hover .icon-chevron-right {
+			background-image: url(../img/glyphicons-halflings-white.png);
+			opacity: 1;
+		}
+	}
+}
+
+	.bs-docs-sidenav.affix {
+		top: $topnav-height + $addlisting-topnav-height;
+	}
+	.bs-docs-sidenav.affix-bottom {
+		position: absolute;
+		top: auto;
+		bottom: 270px;
+	}
