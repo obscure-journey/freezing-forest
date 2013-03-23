@@ -1,0 +1,89 @@
+
+@import "compass/css3";
+
+$teal: 				#1abc9c;
+$darkteal: 		#16A085;
+
+$green: 			#2ecc71;
+$darkgreen:   #27ae60;
+
+$blue: 				#3498DB;
+$darkblue: 		#2980B9;
+$purple:			#9B59B6;
+$darkpurple: 	#8E44AD;
+$navyblue:		#34495E;
+$darknavyblue:#2C3E50;
+$yellow:			#F1C40F;
+$darkyellow:	#F39C12;
+$orange:			#E67E22;
+$darkorange: 	#D35400;
+$red:					#E74C3C;
+$darkred:			#C0392B;
+$grey:				#ECF0F1;
+$darkgrey:		#BDC3C7;
+$slate:				#95A5A6;
+$darkslate:		#7F8C8D;
+
+$maincolor-light: $teal;
+$maincolor-lightdark: $darkteal;
+$maincolor-dark:  $navyblue;
+$maincolor-darkdark:  $darknavyblue;
+$maincolor-accent: $orange;
+$maincolor-accentdark: $darkorange;
+
+$color-superlightgrey: #e5e5e5;
+$color-lightgrey: #ccc;
+$color-grey: #9b9b9b;
+$color-darkgrey: #666;
+$color-superdarkgrey: #222;
+
+$topnav-height: 50px;
+
+@mixin aligntoedges {
+	display: block;
+	position:absolute;
+	height:auto;
+	bottom:0;
+	top:0;
+	left:0;
+	right:0;
+}
+
+@mixin clearfix() {
+	& {
+		*zoom: 1;
+	}
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@mixin chatbox($color:#eceff1, $position:50%) {
+	@include border-radius(6px, 6px);
+	position:relative;
+	background-color: $color;
+	&:before {
+    content: "";
+    border-style: solid;
+    border-width: 12px 12px 12px 0;
+    border-color: transparent $color transparent transparent;
+    height: 0px;
+    position: absolute;
+		left: -12px;
+    top: 50%;
+    width: 0;
+    -webkit-transform: rotate(360deg);
+	}
+}
+
+@mixin calc($property, $expression) { 
+  #{$property}: -moz-calc(#{$expression}); 
+  #{$property}: -o-calc(#{$expression}); 
+  #{$property}: -webkit-calc(#{$expression}); 
+  #{$property}: calc(#{$expression}); 
+} 
